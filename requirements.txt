@@ -1,0 +1,9 @@
+datasets==2.3.2
+easydict==1.9
+einops==0.4.1
+numpy==1.21.2
+pytorch_lightning==1.6.4
+PyYAML==6.0
+torch==1.10.2
+torchvision==0.11.3
+warmup_scheduler==0.3.2

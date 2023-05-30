@@ -1,0 +1,38 @@
+arch: gresnet18s
+dropout: 0.0
+in_channels: 3
+
+# criterion
+label_smoothing: 0.1
+
+# datasets
+num_classes: 100
+dataset: CIFAR-100
+workers: 4
+
+mode: default # or default
+# gsam parameters
+alpha: 0.01
+adaptive: True
+rho_max: 0.04
+rho_min: 0.02
+
+# training
+epoch: 90
+batch_size: 64
+warmup: 5
+
+# optimizer
+optimizer: AdamW
+lr: 0.001
+min_lr: 0.000001
+weight_decay: 0.05
+beta1: 0.9
+beta2: 0.99
+
+# scheduler
+step: 30
+
+
+cutmix_beta: 1
+cutmix_prob: 0.5
