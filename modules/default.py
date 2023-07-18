@@ -71,27 +71,14 @@ class DefaultModule(LightningModule):
         if self.config.optimizer == 'Adam':
             optimizer = torch.optim.Adam(self.model.parameters(),
                                          lr=self.config.lr)
-                                         # weight_decay=self.config.weight_decay)
             scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
                 optimizer, T_max=self.config.epoch, eta_min=self.config.min_lr)
-            # scheduler = torch.optim.lr_scheduler.LinearLR(
-            #     optimizer=optimizer)
         elif self.config.optimizer == 'AdamW':
             optimizer = torch.optim.AdamW(self.model.parameters(),
                                          lr=self.config.lr,
                                          weight_decay=self.config.weight_decay)
             scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
                 optimizer, T_max=self.config.epoch, eta_min=self.config.min_lr)
-            # scheduler = torch.optim.lr_scheduler.LinearLR(
-            #     optimizer=optimizer)
-        elif self.config.optimizer == 'LAMB':
-            optimizer = Lamb(self.model.parameters(),
-                                         lr=self.config.lr,
-                                         weight_decay=self.config.weight_decay)
-            scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-                optimizer, T_max=self.config.epoch, eta_min=self.config.min_lr)
-            # scheduler = torch.optim.lr_scheduler.LinearLR(
-            #     optimizer=optimizer)
         elif self.config.optimizer == 'SGD':
             optimizer = torch.optim.SGD(self.model.parameters(),
                                         lr=self.config.lr,
@@ -101,10 +88,6 @@ class DefaultModule(LightningModule):
                 optimizer, step_size=self.config.step_size, gamma=0.1)
         else:
             raise ValueError('Unknown optimizer')
-
-        if self.config.warmup != 0:
-            scheduler = warmup_scheduler.GradualWarmupScheduler(
-                optimizer, multiplier=1., total_epoch=self.config.warmup, after_scheduler=scheduler)
 
         return {
             "optimizer": optimizer,
