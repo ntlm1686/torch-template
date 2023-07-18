@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", ".*does not have many workers.*")
 
 seed_everything(2, workers=True)
 
-parser = argparse.ArgumentParser(description='Training XForemr on CIFAR-100')
+parser = argparse.ArgumentParser(description='Training the model')
 parser.add_argument('config', type=str)
 parser.add_argument('--resume', '-r', action='store_true',
                     help='resume from checkpoint')
